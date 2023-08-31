@@ -1,8 +1,17 @@
 import os
 
+#third party imports
 from dotenv import load_dotenv
 import praw
+from praw.models.reddit.more import MoreComments
 
+#local imports
+from scrapers.postScraper import PostScraper
+from scrapers.commentScraper import CommentScraper
+from utilities.logger import enable_praw_logging
+from utilities.treeUtils import CommentTree
+#environment setup
+enable_praw_logging()
 load_dotenv()
 
 reddit = praw.Reddit(
@@ -13,11 +22,20 @@ reddit = praw.Reddit(
     username= os.getenv('REDDIT_USR'),
 )
 
+if __name__ == "__main__":
 
+    ps = PostScraper(reddit)
+    cs = CommentScraper(reddit)
+    treegen = CommentTree()
+    posts = ps.get_submissions("FantasyPL","Everton") 
+    
+    for post in posts:
+        pass
 
-#curl command example
-# headers = {"Authorization": f"bearer {os.getenv('TOKEN')}", "User-Agent": "SentimentPipelineAWS v1.0 by /u/notdanke1337"}
-# response = requests.get("https://oauth.reddit.com/api/v1/me", headers=headers)
-# print(response.json())
+    
+    dfs = treegen.getDepthFirstTraversal(post.comments)
+    tree = treegen.generateTree(dfs)
+
+    tree.show(data_property="comment")
 
 
