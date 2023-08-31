@@ -1,37 +1,50 @@
 import os
 
-import praw
+
 import dotenv
 from praw import Reddit
+from praw.models import Submission
 
+from .baseScraper import BaseScraper
 
-
-class CommentScraper:
+class CommentScraper(BaseScraper):
     
     """
     Class to retrieve  comments for a given submission (post)
     """
-    def __init__(self,reddit: Reddit) -> None:
-        self.reddit = reddit
-        self._last_accessed = None
+    def __init__(self, reddit: Reddit) -> None:
+        super().__init__(reddit)
 
-    @property
-    def last_accessed(self) -> str:
-
-        return self._last_accessed
-
-    @last_accessed.setter
-    def last_accessed(self, value) -> None:
-        if not isinstance(value,str):
-            raise TypeError("Last accessed must be a string")
-        self._last_accessed = value
-    
-
-    def get_comments(self,submission: Reddit.submission):
+    def get_comments(self,submission: Submission, recursive: bool = False):
         """
-        Returns a 
+        Returns a CommentForest for the submission.
+        Optionally resolved the MoreComments in the forest
+
+        Args:
+         - submission: PRAW Reddit.submission object that contains submission data
+         - recursive (bool): If true, the PRAW replace_more function is used to
+           recursively get comments from MoreComments instances found in the top-
+           level.
+
+        Returns:
+            A praw CommentsForest object that optionally has any MoreComments object
+            resolved. 
         """
-        pass
+
+        if not isinstance(submission, Submission):
+            raise ValueError("submission must be of type: praw.Reddit.submission")
+
+        if not isinstance(recursive, bool):
+            raise ValueError("recursive must be a Boolean")
+        
+        if recursive:
+            submission.comments.replace_more(limit = None)
+        
+        return submission.comments
+
+        
+        
+
 
 
 
