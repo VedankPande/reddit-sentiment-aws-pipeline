@@ -1,3 +1,6 @@
+"""
+Optional function to get authentication tokens for curl requests. You don't need this if you're using PRAW. 
+"""
 import requests
 import dotenv
 import os
@@ -10,6 +13,7 @@ def refresh_token():
     refresh the token in environment variables
     '''
 
+    # Use the path for your env file here
     dotenv_path = "C:/Users/vedan/Desktop/code/aws-reddit-sent/.env"
 
     data = {
