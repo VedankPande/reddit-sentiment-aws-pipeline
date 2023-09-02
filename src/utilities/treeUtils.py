@@ -10,6 +10,7 @@ class CommentData():
     def __init__(self,comment,score) -> None:
         self.comment = comment
         self.score = score
+        self.sentiment = 0
 
 class CommentTree:
     """
@@ -21,6 +22,12 @@ class CommentTree:
     def getDepthFirstTraversal(self, commentForest) -> list:
         """
         Get the depth first traversal of the comments in a submission/post
+
+        Args:
+         - commentForest: A PRAW CommentForest class object that contains comments for a particular post
+        
+        Return:
+         - A list of comments in the depth first traversal order
         """
         tree = Tree()
         tree.create_node("Root","root")
@@ -43,6 +50,12 @@ class CommentTree:
     def generateTree(self,traversal: list)->Tree:
         """
         Generate a tree based on the dfs traversal of the comments in a submission/post
+
+        Args: 
+            - A list containing a depth first traversal of comments for a particular post
+        
+        Return:
+            - A treelib Tree object that contains the comments of the provided dfs traversal in a tree format
         """
         tree = Tree()
 
