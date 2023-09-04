@@ -47,7 +47,7 @@ class CommentTree:
 
         return comments
 
-    def generateTree(self,traversal: list)->Tree:
+    def generateTree(self, comments)->Tree:
         """
         Generate a tree based on the dfs traversal of the comments in a submission/post
 
@@ -62,6 +62,7 @@ class CommentTree:
         #root node
         tree.create_node("Root", "root", data = CommentData("Root node", 0))
 
+        traversal = self.getDepthFirstTraversal(comments)
         for comment in traversal:
 
             parent_comment = comment.parent_id
