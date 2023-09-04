@@ -3,3 +3,4 @@ __pycache__/
 
 .env
 notes.txt
+src/lambda_layer
