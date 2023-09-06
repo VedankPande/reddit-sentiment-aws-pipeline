@@ -1,4 +1,4 @@
-# Twitter Sentiment Analysis Pipeline
+# Reddit Sentiment Analysis Pipeline
 
 
 
@@ -11,13 +11,16 @@
 - Serverless architecture
 - Store and visualize sentiment for submissions
 
+## Setup Instructions
+
 ## Important for AWS functionality
  - The Python runtime version on your AWS Lambda must be the same as the one used when installing libraries for the lambda layer. If you use the layer provided in `src/lambda_layer`, set the lambda runtime version to `3.9`
  - When running `nltk` on your lambda, you might face the following error: 
  `Unable to import module 'lambda_function': No module named 'regex._regex'`. This usually happens if you're developing locally on Windows. To fix, download the regex library wheel into your lambda layer directory with the command:
 
-         pip install --platform manylinux2014_x86_64 --target=. --implementation cp --python-version 3.9 --only-binary=:all: --upgrade regex
-    Note: You need to cd into the layer directory first (or put the full path to your lambda as the `target`)
+        pip install --platform manylinux2014_x86_64 --target=. --implementation cp --python-version 3.9 --only-binary=:all: --upgrade regex
+    Note: You need to cd into the layer directory first (or put the full path to your lambda as the `target`) Source: [AWS Article](https://repost.aws/knowledge-center/lambda-python-package-compatible)
+
 
 
 ### Optional treelib code changes for development:
