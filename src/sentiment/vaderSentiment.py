@@ -1,8 +1,12 @@
 import nltk
 from nltk.sentiment.vader import SentimentIntensityAnalyzer
 
-#TODO: run only once - maybe store it in the layer and then upload?
-nltk.download('vader_lexicon')
+#Compatibility for lambda
+lambda_nltk_data_path = '/tmp/nltk_data'
+if lambda_nltk_data_path not in nltk.data.path:
+    nltk.data.path.append(lambda_nltk_data_path)
+    
+nltk.download('vader_lexicon', download_dir= lambda_nltk_data_path)
 
 def get_sentiment_dict(text: str) -> dict:
     
