@@ -17,7 +17,7 @@ reddit = praw.Reddit(
     client_id= os.environ['API_KEY'],
     client_secret= os.environ['SECRET'],
     password= os.environ['REDDIT_PWD'],
-    user_agent= "SentimentPipelineAWS v1.0 by u/notdanke1337",
+    user_agent= "SentimentPipelineAWS v1.0",
     username= os.environ['REDDIT_USR'],
 )
 
@@ -26,7 +26,7 @@ cs = CommentScraper(reddit)
 treegen = CommentTree()
 sqs = boto3.client('sqs')
 
-sqs_url = "https://sqs.ap-south-1.amazonaws.com/530128583111/ComprehendLambdaQueue"
+sqs_url = os.environ("SQS_URL")
 
 def lambda_handler(event, context):
     

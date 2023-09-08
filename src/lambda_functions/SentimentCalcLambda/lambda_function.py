@@ -1,3 +1,4 @@
+import os
 import json
 import treelib
 import pickle
@@ -15,8 +16,8 @@ service = 'es'
 credentials = boto3.Session().get_credentials()
 awsauth = AWS4Auth(credentials.access_key, credentials.secret_key, region, service, session_token=credentials.token)
 
-host = 'https://search-elasticredditsentiment-cilnjwunulmc6nke43xogssrmu.ap-south-1.es.amazonaws.com'
-index = 'lambda-reddit-sentiment'
+host = os.environ["OPENSEARCH_DOMAIN_URL"]
+index = os.environ["OPENSEARCH_INDEX"]
 datatype = '_doc/'
 url = host + '/' + index + '/' + datatype
 
