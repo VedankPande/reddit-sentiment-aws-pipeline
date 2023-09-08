@@ -7,6 +7,11 @@
 
 ![Alt text](/media/architecture.png "Optional title")
 
+## Folder structure:
+- lambda_functions: Code to deploy to lambda functions
+- lambda_layer: Python dependencies for the lambda layer
+- local: modules for local development
+
 ## Features
 
 - Serverless architecture
@@ -27,3 +32,8 @@
 ### Optional treelib code changes for development:
 
  1. tree.py -> `show` function (line 870): Printing a tree outputs the Tree object in byte format. If you have this problem as well, change `print(self.reader.encode('utf-8'))` to `print(self.reader)`. Only needed if you want a tree structure display of your comments tree. Source: [This stackoverflow post](https://stackoverflow.com/questions/46345677/treelib-prints-garbage-instead-of-pseudographics-in-python3)
+
+
+### Lambda-Opensearch permissions:
+  - Add `AmazonOpenSearchServiceFullAccess` policy to the sentiment lambda function
+  - Map your lambda role to an OpenSearch user if you're using fine grained control: Steps: [AWS docs](https://docs.aws.amazon.com/opensearch-service/latest/developerguide/search-example.html)
