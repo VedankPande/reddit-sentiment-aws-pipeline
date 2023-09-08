@@ -1,7 +1,12 @@
 __pycache__/
 *.py[cod]
 
+#extensions
 .env
+*.zip
+
+#folders
+lambda_layer/
+
+#files
 notes.txt
-src/lambda_layer
-src/lambda_functions
