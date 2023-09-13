@@ -5,7 +5,7 @@
 
 ## Architecture:
 
-![Alt text](/media/architecture.png "Optional title")
+![Architecture](/media/architecture.png "Optional title")
 
 ## Folder structure:
 - lambda_functions: Code to deploy to lambda functions
